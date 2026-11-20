@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#121110" />
+    <title>Sunset Riot | Cover studio</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="./" aria-label="Sunset Riot home">sunset riot</a>
+      <div class="topbar-meta">
+        <span class="status-chip"><span class="status-dot" aria-hidden="true"></span>local darkroom</span>
+        <span class="privacy-note">photos stay on this device</span>
+      </div>
+    </header>
+
+    <main class="studio-shell">
+      <aside class="control-panel" aria-label="Cover controls">
+        <div class="panel-intro">
+          <span class="panel-kicker">cover studio</span>
+          <h1>Make a scene.</h1>
+          <p>Build a six-frame cover with one photo, a hard crop, and a little trouble.</p>
+        </div>
+
+        <section class="control-group" aria-labelledby="source-heading">
+          <div class="group-heading">
+            <h2 id="source-heading">Source photo</h2>
+            <span id="photoStatus">sample loaded</span>
+          </div>
+          <label class="upload-button" for="photoInput">
+            <span>Choose a photo</span>
+            <span class="upload-key">JPG / PNG</span>
+          </label>
+          <input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp" />
+        </section>
+
+        <section class="control-group" aria-labelledby="caption-heading">
+          <div class="group-heading">
+            <h2 id="caption-heading">Caption</h2>
+            <span id="captionCount">0 / 28</span>
+          </div>
+          <label class="sr-only" for="captionInput">Cover caption</label>
+          <input id="captionInput" class="caption-input" type="text" maxlength="28" value="Sunset boulevard" autocomplete="off" />
+        </section>
+
+        <section class="control-group" aria-labelledby="panels-heading">
+          <div class="group-heading">
+            <h2 id="panels-heading">Panels</h2>
+            <span id="activePanelLabel">hero selected</span>
+          </div>
+          <div class="panel-picker" id="panelPicker"></div>
+          <div class="crop-control">
+            <label for="zoomRange">Crop zoom</label>
+            <output id="zoomValue" for="zoomRange">1.00×</output>
+          </div>
+          <input id="zoomRange" class="range" type="range" min="1" max="2.8" step="0.01" value="1" />
+          <p class="hint">Drag a panel to pan. Scroll over it to zoom.</p>
+        </section>
+
+        <section class="control-group grade-group" aria-labelledby="grade-heading">
+          <div class="group-heading">
+            <h2 id="grade-heading">Grade</h2>
+            <span id="gradeLabel">Riot Ink</span>
+          </div>
+          <div class="grade-picker" role="group" aria-label="Color grade">
+            <button class="grade-button is-active" type="button" data-grade="riot">Riot Ink</button>
+            <button class="grade-button" type="button" data-grade="sunset">Sunset</button>
+            <button class="grade-button" type="button" data-grade="mono">Silver</button>
+            <button class="grade-button" type="button" data-grade="raw">Raw</button>
+          </div>
+        </section>
+
+        <section class="export-group" aria-labelledby="export-heading">
+          <div class="group-heading">
+            <h2 id="export-heading">Export</h2>
+            <span>PNG / square</span>
+          </div>
+          <div class="export-row">
+            <label class="sr-only" for="exportSize">Export size</label>
+            <select id="exportSize" class="size-select">
+              <option value="1080">1080 px</option>
+              <option value="1600">1600 px</option>
+              <option value="2048">2048 px</option>
+            </select>
+            <button id="exportButton" class="export-button" type="button">Export cover</button>
+          </div>
+          <p id="exportStatus" class="export-status" aria-live="polite">Ready when the frame is right.</p>
+        </section>
+      </aside>
+
+      <section class="workspace" aria-label="Cover preview">
+        <div class="workspace-head">
+          <div>
+            <span class="workspace-kicker">live composition</span>
+            <h2 id="selectionName">Hero panel</h2>
+          </div>
+          <button id="resetCrop" class="text-button" type="button">Reset crop</button>
+        </div>
+        <div class="canvas-stage">
+          <div class="canvas-wrap">
+            <canvas id="coverCanvas" width="900" height="900" aria-label="Six-panel cover preview"></canvas>
+            <div id="emptyState" class="canvas-empty" hidden>
+              <strong>Drop in a photo</strong>
+              <span>Your image never leaves this tab.</span>
+            </div>
+          </div>
+          <div class="canvas-legend">
+            <span><i class="legend-swatch legend-orange"></i>hero panel</span>
+            <span><i class="legend-swatch legend-teal"></i>drag to reframe</span>
+            <span class="canvas-size">preview / 1:1</span>
+          </div>
+        </div>
+        <div class="panel-rail-heading">
+          <span>Panel strip</span>
+          <span>6 frames / one source</span>
+        </div>
+        <div class="panel-rail" id="panelRail"></div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
